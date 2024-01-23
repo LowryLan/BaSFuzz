@@ -1,8 +1,9 @@
 # -*- coding = utf-8 -*-
 # @Time : 2023/5/5 8:28
 # @Author : Lowry
-# @File : tsfm
+# @File : selection
 # @Software : PyCharm
+
 import os
 import data
 import numpy as np
@@ -34,10 +35,10 @@ def split_list(byte_arr=None, file_list=None, file_len=None):
 
 def selection(path=None, project=None):
     """
-    Get weight metric of byte metric
+    Seed Selection based on byte difference analysis
 
     :param project: project directory name
-    :parameter path: seed path
+    :parameter path: out path
 
     :return: 1 or -1
     """
@@ -62,12 +63,14 @@ def selection(path=None, project=None):
 
     similarity_list = similarity.similarity_re(byte_array=byte_arr0, seed_list=file_list, max_len=max(file_len))
 
-    # 按照文件id重新排序
+    # Reorder by file id
     file_len_new = file_len
     file_list_new = file_list
 
     seed_num = int(len(file_len_new) * 0.5)
-    # seed_num = len(similarity_list)     # 低质量种子数量（对比实验内容）
+
+    """ This is comparing experimental content, that's BaSFuzz↓. """
+    # seed_num = len(similarity_list)
 
     if write_to_file(file_list=file_list_new, project=project, similarity_list=similarity_list, seed_num=seed_num):
         return 1

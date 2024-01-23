@@ -1,23 +1,21 @@
-# -*- codeing = utf-8 -*-
+# -*- coding = utf-8 -*-
 # @Time : 2023/7/12 8:16
 # @Author : Lowry
 # @File : similarity
 # @Software : PyCharm
 
-import numpy as np
-import random
 from tqdm import trange, tqdm
 
 
 def sim_a(byte_array=None, seed_list=None, max_len=None):
     """
-    计算相似度度量a
+    Compute byte similarity
 
-    :parameter byte_array: 字节序列
-    :parameter seed_list: 种子名序列
-    :parameter max_len: 字节序列最大长度
+    :parameter byte_array: byte sequences
+    :parameter seed_list: list of seed name
+    :parameter max_len: max length of byte sequences
 
-    :return similarity_a_list: 相似度度量a结果
+    :return similarity_a_list: byte similarity score
     """
     similarity_a_list = []
     byte_list = byte_array.tolist()
@@ -36,63 +34,62 @@ def sim_a(byte_array=None, seed_list=None, max_len=None):
 
 def sim_b(byte_array=None, seed_list=None, max_len=None):
     """
-    计算相似度度量b
+    Compute structure similarity
 
-    :parameter byte_array: 字节序列
-    :parameter seed_list: 种子名序列
-    :parameter max_len: 字节序列最大长度
+    :parameter byte_array: byte sequences
+    :parameter seed_list: list of seed name
+    :parameter max_len: max length of byte sequences
 
-    :return similarity_b_list: 相似度度量b结果
+    :return similarity_b_list: structure similarity score
     """
     similarity_b_list = []
-    similarity_b_matrix = []                        # 类上三角矩阵，每个元素记录第i、j种子的相似度
+    similarity_b_matrix = []                        # Record the similarity of the i-th and jth seeds for each element (Similar to an upper triangular matrix)
     byte_list = byte_array.tolist()
     seed_num = len(seed_list)
 
     for i in range(seed_num):
         similarity_b = []
-        for q in range(i):                          # 填充下三角元素，减少逐个遍历的时间
+        for q in range(i):                          # Fill in the lower triangular elements to reduce the time spent traversing each one
             similarity_b.append(similarity_b_matrix[q][i])
         similarity_b.append(1)
         for j in tqdm(range(seed_num-i-1), desc=f'Similarity_b({i+1}/{seed_num})--->seed {seed_list[i][:9]}'):
             j += (i + 1)
-            similarity_num = 0                      # 相同位置字节大小相同的数量
+            similarity_num = 0                      # Number of bytes with the same position and size
             for t in range(max_len):
                 if byte_list[i][t] == byte_array[j][t]:
                     similarity_num += 1
-            similarity_b.append(round(similarity_num/max_len, 6))       # 第i、j种子所有同一位置字节相同的比例
-        similarity_b_matrix.append(similarity_b)                        # 更新矩阵
-        similarity_b_list.append(round(sum(similarity_b), 6))           # 填充第i个种子的相似度度量b
+            similarity_b.append(round(similarity_num/max_len, 6))       # The proportion of identical bytes at the same position in seeds i and j
+        similarity_b_matrix.append(similarity_b)                        # Update Matrix
+        similarity_b_list.append(round(sum(similarity_b), 6))           # Fill in the similarity measure b for the i-th seed
     return similarity_b_list
 
 
 def similarity(byte_array=None, seed_list=None, max_len=None):
     """
-    计算自适应相似度similarity
+    Compute similarity
 
-    :parameter byte_array: 字节序列
-    :parameter seed_list: 种子名序列
-    :parameter max_len: 字节序列最大长度
+    :parameter byte_array: byte sequences
+    :parameter seed_list: list of seed name
+    :parameter max_len: max length of byte sequences
 
-    :return similarity_list: 相似度度量结果
+    :return similarity_list: similarity score(weighted summation)
     """
     a_list = sim_a(byte_array=byte_array, seed_list=seed_list, max_len=max_len)
     b_list = sim_b(byte_array=byte_array, seed_list=seed_list, max_len=max_len)
 
-    k = 0.7
-    # 超参数k(α)
+    h = 0.7    # hyperparameter for weighted summation (h)
 
-    similarity_list = [round(a_list[i] * k + b_list[i] * (1 - k), 6) for i in range(len(seed_list))]
+    similarity_list = [round(a_list[i] * h + b_list[i] * (1 - h), 6) for i in range(len(seed_list))]
     return similarity_list
 
 
 def get_index(ele=None, list_src=None):
     """
 
-    :param ele: 指定元素
-    :param list_src: 列表
+    :param ele: specify elements
+    :param list_src: source list
 
-    :return index_list: 该元素存在于列表中的索引
+    :return index_list: The index of ele in the list
     """
     index_list = []
     for i in range(len(list_src)):
@@ -103,17 +100,17 @@ def get_index(ele=None, list_src=None):
 
 def order_seed(similarity_list=None, seed_list=None):
     """
-    根据similarity从大到小对种子进行排序
+    Sort the seeds from low to high based on their similarity
 
-    :param similarity_list: 自适应相似度序列
-    :param seed_list: 种子名序列
+    :param similarity_list: Adaptive similarity list
+    :param seed_list: seed name list
 
-    :return seed_list_new: 排序结果
+    :return seed_list_new: order result
     """
     seed_list_new = []
     similarity_sort = sorted(similarity_list)
     i = 0
-    temp = 0                            # 记录当前相似度得分
+    temp = 0                            # Record the current similarity score
     while i < len(seed_list):
         sim = similarity_sort[i]
         if sim == temp:
@@ -130,23 +127,27 @@ def order_seed(similarity_list=None, seed_list=None):
 
 def similarity_re(byte_array=None, seed_list=None, max_len=None):
     """
-    主函数
+    Main function in this python file
 
-    :parameter byte_array: 字节序列
-    :parameter seed_list: 种子名序列
-    :parameter max_len: 字节序列最大长度
+    :parameter byte_array: byte sequences
+    :parameter seed_list: seed name list
+    :parameter max_len: max length of byte sequences
 
-    :return similarity_list: 相似度度量结果
+    :return similarity_list: mutated seeds list
     """
 
-    """ 计算相似度 """
+    """ Compute similarity score """
     similarity_list = similarity(byte_array=byte_array, seed_list=seed_list, max_len=max_len)
 
-    """ 排序 """
+    """ Order """
     seed_list_new = order_seed(similarity_list=similarity_list, seed_list=seed_list)
 
-    """ 选择低质量种子（对比实验内容） """
-    # seed_list_new = choose_bad_seed(seed_list_new)
+    """ 
+        Selecting high-score seeds,
+        this is comparing experimental content,
+        that's BaSFuzz↓.
+    """
+    # seed_list_new = chose_bad_seed(seed_list_new)
     # print(len(seed_list_new))
     # print("============")
     # for i in seed_list_new:
@@ -157,10 +158,10 @@ def similarity_re(byte_array=None, seed_list=None, max_len=None):
 
 def order_by_id(seed_list):
     """
-    根据种子id排序
+    Order seeds by id
 
-    :param seed_list: 种子名序列
-    :return: 顺序种子队列
+    :param seed_list: seed name list
+    :return: order results
     """
     seed_list_new = []
     id_list = [int(i[3:9]) for i in seed_list]
@@ -173,29 +174,13 @@ def order_by_id(seed_list):
     return seed_list_new
 
 
-def choose_bad_seed(seed_list):
+def chose_bad_seed(seed_list):
     """
-    选择低质量种子
+    Chose high-score seeds
 
-    :param seed_list:
-    :return: 低质量种子队列
+    :param seed_list: seed list
+    :return: results
     """
     seed_list = seed_list[int(len(seed_list) / 2):]
     seed_list_new = order_by_id(seed_list)
     return seed_list_new
-
-
-def test():
-    byte_list = []
-    seed_list = []
-    for i in tqdm(range(100), desc='Initial seed'):
-        seed = 'id:' + str(i)
-        byte = [random.randint(0, 255)for j in range(10000)]
-        byte_list.append(byte)
-        seed_list.append(seed)
-    byte_array = np.array(byte_list)
-    similarity_re(byte_array=byte_array, seed_list=seed_list, max_len=10000)
-    print('finish')
-
-
-# test()
