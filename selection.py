@@ -6,7 +6,7 @@
 
 import os
 import data
-import numpy as np
+import numpy as np  # numpy 1.24.3
 import similarity
 
 
@@ -94,7 +94,7 @@ def write_to_file(file_list=None,  project=None, similarity_list=None, seed_num=
 
     sign = str(int(seed_num * 0.7))
 
-    with open('./afl-lowry/weight_info', 'w') as f:
+    with open('afl-basfuzz/weight_info', 'w') as f:
     # with open('./programs/' + project + '/weight_info', 'w') as f:
         for t in range(seed_num):
             temp = similarity_list[t]

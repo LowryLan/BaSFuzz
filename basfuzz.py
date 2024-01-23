@@ -6,7 +6,7 @@
 
 import sys
 import socket
-import attention
+import selection
 
 HOST = '127.0.0.1'
 PORT = 12012
@@ -19,7 +19,7 @@ def get_args():
 
     :return: project & PUT
     """
-    project = sys.argv[1]       # directory name of project
+    project = sys.argv[1]       # directory name of the tested project
     out = sys.argv[2]           # abs path of out directory
     return project, out
 
@@ -36,7 +36,7 @@ def main():
     path = './programs/' + project + '/out/queue/'
     # path = out + '/queue/'
     print('connected by MLFuzz execution module ' + str(addr))
-    attention.selection(path=path, project=project)
+    selection.selection(path=path, project=project)
     conn.sendall(b"start")
     print("send success")
     while True:
@@ -45,7 +45,7 @@ def main():
             break
         else:
             print(f'connected, sign is {data}')
-            attention.selection(path=path, project=project)
+            selection.selection(path=path, project=project)
             print('generate complete')
             conn.sendall(b"yesss")            # send to BaSFuzz
     conn.close()
