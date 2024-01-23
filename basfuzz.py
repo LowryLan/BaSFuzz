@@ -21,7 +21,7 @@ def get_args():
     """
     project = sys.argv[1]       # directory name of the tested project
     # out = sys.argv[2]           # abs path of out directory
-    return project, out
+    return project
 
 
 def main():
@@ -30,7 +30,7 @@ def main():
     sock.bind((HOST, PORT))
     sock.listen(1)
     conn, addr = sock.accept()
-    project, out = get_args()
+    project = get_args()
     print(f"{project} is the tested project")
     # print(f"out: {out}")
     path = './programs/' + project + '/out/queue/'
