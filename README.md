@@ -30,4 +30,4 @@ Compile **afl-basfuzz**: The compile command is the same as afl
 `<path of afl-fuzz> -i <input> -o <output> <PUT> <parameters> @@`
 
 
-_Detailed scripts in each project in **programs**_
+Detailed scripts in each project in **programs**

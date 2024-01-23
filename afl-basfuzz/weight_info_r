@@ -1,7 +1,0 @@
-/home/lowry/Documents/myFuzz/MLFuzz/programs/readelf/out/queue/id:000001,src:000000,op:flip1,pos:0,+cov|4
-/home/lowry/Documents/myFuzz/MLFuzz/programs/readelf/out/queue/id:000005,src:000000,op:flip1,pos:5,+cov|4
-/home/lowry/Documents/myFuzz/MLFuzz/programs/readelf/out/queue/id:000006,src:000000,op:flip1,pos:6,+cov|4
-/home/lowry/Documents/myFuzz/MLFuzz/programs/readelf/out/queue/id:000002,src:000000,op:flip1,pos:4,+cov|4
-/home/lowry/Documents/myFuzz/MLFuzz/programs/readelf/out/queue/id:000007,src:000000,op:flip1,pos:6,+cov|4
-/home/lowry/Documents/myFuzz/MLFuzz/programs/readelf/out/queue/id:000004,src:000000,op:flip1,pos:5,+cov|4
-/home/lowry/Documents/myFuzz/MLFuzz/programs/readelf/out/queue/id:000003,src:000000,op:flip1,pos:4,+cov|4
