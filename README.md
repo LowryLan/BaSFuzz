@@ -23,8 +23,11 @@ To mitigate the performance degradation of fuzz testing caused by repeatedly mut
 Compile **afl-basfuzz**: The compile command is the same as afl
 
 ### Running
-1. Run Python terminal 
+1. Run Python in a terminal  
 `python ./basfuzz.py <name of tested project> <absolute path of output>`  
 
-2. Run AFL terminal
+2. Run AFL in _another_ terminal  
 `<path of afl-fuzz> -i <input> -o <output> <PUT> <parameters> @@`
+
+
+_Detailed scripts in each project in **programs**_
