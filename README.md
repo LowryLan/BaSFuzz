@@ -10,8 +10,12 @@ To mitigate the performance degradation of fuzz testing caused by repeatedly mut
  * **similarity.py**: used to compute similarity between seeds
 
 ## Environments
+The experimental development and execution platform consisted of a computer equipped with 8 AMD® Ryzen 9 5900x
+processors and 16GB of RAM.
+
 | name   | version |
 |--------|---------|
+| Ubuntu | 20.04   |
 | python | 3.7     |
 | numpy  | 1.24.3  |
 | tqdm   | 4.65.0  |
@@ -24,7 +28,7 @@ Compile **afl-basfuzz**: The compile command is the same as afl
 
 ### Running
 1. Run Python in a terminal  
-`python ./basfuzz.py <name of tested project> <absolute path of output>`  
+`python ./basfuzz.py <name of tested project>`  
 
 2. Run AFL in _another_ terminal  
 `<path of afl-fuzz> -i <input> -o <output> <PUT> <parameters> @@`
