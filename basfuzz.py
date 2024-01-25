@@ -20,7 +20,6 @@ def get_args():
     :return: project & PUT
     """
     project = sys.argv[1]       # directory name of the tested project
-    # out = sys.argv[2]           # abs path of out directory
     return project
 
 
@@ -32,9 +31,7 @@ def main():
     conn, addr = sock.accept()
     project = get_args()
     print(f"{project} is the tested project")
-    # print(f"out: {out}")
     path = './programs/' + project + '/out/queue/'
-    # path = out + '/queue/'
     print('connected by MLFuzz execution module ' + str(addr))
     selection.selection(path=path, project=project)
     conn.sendall(b"start")

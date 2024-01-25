@@ -94,12 +94,11 @@ def write_to_file(file_list=None,  project=None, similarity_list=None, seed_num=
 
     sign = str(int(seed_num * 0.7))
 
-    with open('afl-basfuzz/weight_info', 'w') as f:
-    # with open('./programs/' + project + '/weight_info', 'w') as f:
+    with open('./programs/' + project + '/weight_info', 'w') as f:
         for t in range(seed_num):
             temp = similarity_list[t]
             i = file_list.index(temp)
-            file_name = os.path.dirname(os.path.abspath(__file__)) + '/programs/' + project + '/out/queue/' + file_list[i]
+            file_name = 'out/queue/' + file_list[i]
             f.write(file_name + '|' + sign + '\n')
     return 1
 
