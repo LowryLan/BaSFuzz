@@ -8,6 +8,7 @@ To mitigate the performance degradation of fuzz testing caused by repeatedly mut
  * **selection.py**: used for Seed Selection based on byte difference analysis
  * **data.py**: used to read seed byte
  * **similarity.py**: used to compute similarity between seeds
+ * **afl-gcc**: used to compile the program under test
 
 ## Environments
 The experimental development and execution platform consisted of a computer equipped with 8 AMD® Ryzen 9 5900x
@@ -35,3 +36,6 @@ Compile **afl-basfuzz**: The compile command is the same as afl
 
 
 Detailed scripts in each project in **programs**
+
+_\*NOTE*:_   
+ We recommend testing the environment by testing _readelf_, because we provide **in2** for it, which contains a small number of seeds.
