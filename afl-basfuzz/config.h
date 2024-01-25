@@ -28,7 +28,8 @@
 
 /* Version string: */
 
-#define VERSION             "2.57b"
+//#define VERSION             "2.57b"
+#define VERSION             "BaSFuzz"
 
 /******************************************************
  *                                                    *
