@@ -17,7 +17,7 @@ processors and 16GB of RAM.
 | name   | version |
 |--------|---------|
 | Ubuntu | 20.04   |
-| python | 3.7     |
+| python | 3.7 3.8 |
 | numpy  | 1.24.3  |
 | tqdm   | 4.65.0  |
 
