@@ -77,7 +77,7 @@ def similarity(byte_array=None, seed_list=None, max_len=None):
     a_list = sim_a(byte_array=byte_array, seed_list=seed_list, max_len=max_len)
     b_list = sim_b(byte_array=byte_array, seed_list=seed_list, max_len=max_len)
 
-    h = 0.7    # hyperparameter for weighted summation (h)
+    h = 0.5    # hyperparameter for weighted summation (h)
 
     similarity_list = [round(a_list[i] * h + b_list[i] * (1 - h), 6) for i in range(len(seed_list))]
     return similarity_list
