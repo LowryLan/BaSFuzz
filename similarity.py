@@ -5,6 +5,7 @@
 # @Software : PyCharm
 
 from tqdm import trange, tqdm
+import numpy as np
 
 
 def sim_a(byte_array=None, seed_list=None, max_len=None):
@@ -18,16 +19,27 @@ def sim_a(byte_array=None, seed_list=None, max_len=None):
     :return similarity_a_list: byte similarity score
     """
     similarity_a_list = []
-    byte_list = byte_array.tolist()
-    seed_num = len(seed_list)
 
-    for i in tqdm(range(len(byte_list)), desc='Similarity_a'):
-        similarity_a = []
-        for j in range(max_len):
-            byte_row = byte_array[:, j].tolist()
-            num = byte_row.count(byte_list[i][j])
-            sim = round(num / seed_num, 6)
-            similarity_a.append(sim)
+    # 获取数组的形状
+    rows, cols = byte_array.shape
+
+    # 创建一个相同形状的数组用于存储结果
+    result = np.zeros_like(byte_array)
+
+    # 对每一列进行统计
+    for col in tqdm(range(cols), desc='Similarity_a_1'):
+        unique, counts = np.unique(byte_array[:, col], return_counts=True)
+        count_dict = dict(zip(unique, counts))
+        result[:, col] = [count_dict[val] for val in byte_array[:, col]]
+
+    for i in tqdm(range(rows), desc='Similarity_a_2'):
+        similarity_a = result[i, :]
+        # for j in range(max_len):
+        #     temp = byte_list[i][j]
+        #     byte_row = byte_array[:, j].tolist()
+        #     num = byte_row.count(temp)
+        #     sim = round(num / seed_num, 6)
+        #     similarity_a.append(sim)
         similarity_a_list.append(round(sum(similarity_a), 6))
     return similarity_a_list
 
@@ -44,20 +56,22 @@ def sim_b(byte_array=None, seed_list=None, max_len=None):
     """
     similarity_b_list = []
     similarity_b_matrix = []                        # Record the similarity of the i-th and jth seeds for each element (Similar to an upper triangular matrix)
-    byte_list = byte_array.tolist()
+    # byte_list = byte_array.tolist()
     seed_num = len(seed_list)
 
-    for i in range(seed_num):
+    for i in tqdm(range(seed_num), desc='Similarity_b'):
         similarity_b = []
         for q in range(i):                          # Fill in the lower triangular elements to reduce the time spent traversing each one
             similarity_b.append(similarity_b_matrix[q][i])
         similarity_b.append(1)
-        for j in tqdm(range(seed_num-i-1), desc=f'Similarity_b({i+1}/{seed_num})--->seed {seed_list[i][:9]}'):
+        # for j in tqdm(range(seed_num-i-1), desc=f'Similarity_b({i+1}/{seed_num})--->seed {seed_list[i][:9]}'):
+        for j in range(seed_num-i-1):
             j += (i + 1)
             similarity_num = 0                      # Number of bytes with the same position and size
-            for t in range(max_len):
-                if byte_list[i][t] == byte_array[j][t]:
-                    similarity_num += 1
+            # for t in range(max_len):
+            #     if byte_list[i][t] == byte_array[j][t]:
+            #         similarity_num += 1
+            similarity_num = np.sum(byte_array[i] == byte_array[j])             # Number of bytes with the same position and size
             similarity_b.append(round(similarity_num/max_len, 6))       # The proportion of identical bytes at the same position in seeds i and j
         similarity_b_matrix.append(similarity_b)                        # Update Matrix
         similarity_b_list.append(round(sum(similarity_b), 6))           # Fill in the similarity measure b for the i-th seed

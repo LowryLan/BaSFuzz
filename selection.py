@@ -9,6 +9,8 @@ import data
 import numpy as np  # numpy 1.24.3
 import similarity
 
+import time
+
 
 def split_list(byte_arr=None, file_list=None, file_len=None):
     """
@@ -61,8 +63,11 @@ def selection(path=None, project=None):
         file_list = file_list_new
         file_len = file_len_new
 
+    begin = int(time.time())
     similarity_list = similarity.similarity_re(byte_array=byte_arr0, seed_list=file_list, max_len=max(file_len))
+    end = int(time.time())
 
+    print("time costs: " + str(end - begin) + "s")
     # Reorder by file id
     file_len_new = file_len
     file_list_new = file_list
