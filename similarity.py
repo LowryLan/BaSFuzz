@@ -34,12 +34,6 @@ def sim_a(byte_array=None, seed_list=None, max_len=None):
 
     for i in tqdm(range(rows), desc='Similarity_a_2'):
         similarity_a = result[i, :]
-        # for j in range(max_len):
-        #     temp = byte_list[i][j]
-        #     byte_row = byte_array[:, j].tolist()
-        #     num = byte_row.count(temp)
-        #     sim = round(num / seed_num, 6)
-        #     similarity_a.append(sim)
         similarity_a_list.append(round(sum(similarity_a), 6))
     return similarity_a_list
 
@@ -58,6 +52,19 @@ def sim_b(byte_array=None, seed_list=None, max_len=None):
     similarity_b_matrix = []                        # Record the similarity of the i-th and jth seeds for each element (Similar to an upper triangular matrix)
     # byte_list = byte_array.tolist()
     seed_num = len(seed_list)
+
+    rows, cols = byte_array.shape
+
+    result = np.zeros((rows, rows), dtype=int)
+
+    # for i in tqdm(range(rows), desc='Similarity_b_1'):
+    #     for j in range(rows):
+    #         result[i, j] = round(np.sum(byte_array[i] == byte_array[j])/max_len, 6)
+    #         result[j, i] = result[i, j]
+    #
+    # for i in tqdm(range(rows), desc='Similarity_b_2'):
+    #     similarity_b = result[i, :]
+    #     similarity_b_list.append(round(sum(similarity_b), 6))
 
     for i in tqdm(range(seed_num), desc='Similarity_b'):
         similarity_b = []

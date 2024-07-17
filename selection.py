@@ -72,7 +72,7 @@ def selection(path=None, project=None):
     file_len_new = file_len
     file_list_new = file_list
 
-    seed_num = int(len(file_len_new) * 0.5)
+    seed_num = len(file_len_new)
 
     """ This is comparing experimental content, that's BaSFuzz↓. """
     # seed_num = len(similarity_list)
