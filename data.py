@@ -8,7 +8,7 @@ import os
 import numpy as np
 
 
-def get_bits(max_feature_length=10000, path=None):
+def get_bits(max_feature_length, path=None):
     """
     Get seeds' bits
 
@@ -38,21 +38,37 @@ def get_bits(max_feature_length=10000, path=None):
     return x_data[0], ll
 
 
+def get_max_file_len(dir_path=None):
+    largest_file_size = 0
+    for root, dirs, files in os.walk(dir_path):
+        for file in files:
+            file_path = os.path.join(root, file)
+            file_size = os.path.getsize(file_path)
+            if file_size > largest_file_size:
+                largest_file_size = file_size
+    return largest_file_size
+
+
 def get_byte(dir_path=None):
     """
     Get seeds' bytes sequences
     :param dir_path: seed path
+    :param max_len: max length
     """
     X = []  # Used to store feature values
     X_file_name = []    # Used to store the selected seed file name
     file_len = []       # Used to store the length of seed bytes
     files = os.listdir(dir_path)
+    max_len = get_max_file_len(dir_path=dir_path)
+    if max_len > 10000:
+        max_len = 10000
+    print("The maximum length of the seed：" + str(max_len))
     for file in files:
         if file == '.state':
             continue
         X_file_name.append(file)  # Store all seed file names
         file = dir_path + '' + file
-        x_data, x_len = get_bits(path=file)
+        x_data, x_len = get_bits(path=file, max_feature_length=max_len)
         X.append(x_data)
         file_len.append(x_len)
     X = np.array(X)

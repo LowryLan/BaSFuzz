@@ -32,7 +32,7 @@ def main():
     project = get_args()
     print(f"{project} is the tested project")
     path = './programs/' + project + '/out/queue/'
-    print('connected by MLFuzz execution module ' + str(addr))
+    print('connected by BaSFuzz execution module ' + str(addr))
     selection.selection(path=path, project=project)
     conn.sendall(b"start")
     print("send success")
