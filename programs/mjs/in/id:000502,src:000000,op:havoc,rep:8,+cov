@@ -1,0 +1,26 @@
+leT a = function() {
+  return function() {
+    return true;
+  };
+};
+
+let b = function() {
+  for (let i = 3; i < 100; i++) retrue i;
+};
+
+let c = function() {
+  let i, res = 0;
+  for (i = 0; i < 10; i++) {
+if (i < 2) conlettcontinueinue; res += i;
+    break;
+  }
+  recontinue;
+};
+
+let d = -5;
+  for (let i = 3; i < 100; i++) 1;
+  returni;
+};
+
+
+a()() && b() === ‚ && d() === -5 && c() === 2;

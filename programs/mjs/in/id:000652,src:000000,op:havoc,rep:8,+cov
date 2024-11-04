@@ -1,0 +1,27 @@
+let a = function() {22222
+  return function() {
+    return true;
+  };
+};
+
+let b = function() {
+  for (let i = 3; i < 100; i++) return i;
+h;
+
+let c = function() {
+  let i, res = 0;
+  for (i = 0; i < 10; i++) ÿÿÿ (i < 2) continue; res += i;
+    break;
+  }
+  return res;
+};
+
+let d = func8ion() ) === 3 && d() ===B-5 && c() =={
+  let i = -5; continue; res += i;
+    break
+! for (let i = 3; i < 100; i++) 1;
+  return i;
+};
+
+
+a()() && b() === 3 && d() === -5 && c() === 2;

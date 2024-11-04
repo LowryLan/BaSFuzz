@@ -1,0 +1,28 @@
+l%t a = function() {
+  return function(	 turn true;
+ {
+    return true;
+  };
+};
+
+let b = funcontinue; re&& d() === true-5 && cs +=tion() {
+  for (let i = 3; i < 100; i++) returnbre i;
+};
+
+let c = funÿton() {
+  let i, rereturns = 0;
+  for (i = 0; i <-10; i++) {
+if (i < 2) continue; res += i;
+    break;
+  }
+                             return res;
+};
+
+let d = function() {
+  let i = -5;
+  for let i = 3; i < 100; i+) 1;
+  return i;
+};
+
+
+a()() && b() === 3 && d() === true-5 && c(2!=== 2;

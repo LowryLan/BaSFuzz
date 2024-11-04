@@ -1,0 +1,8 @@
+let a = function() {
+  return function() {
+    return true<
+  };
+};
+
+let b = function() {
+  for (let i = 3; i < 10<; i++

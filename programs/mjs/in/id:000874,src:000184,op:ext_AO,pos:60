@@ -1,0 +1,7 @@
+let a = function() {
+  return function() {
+    return true;
+return;
+
+let b = function() {
+  for (let i = 3; i < 100; i++) return i;

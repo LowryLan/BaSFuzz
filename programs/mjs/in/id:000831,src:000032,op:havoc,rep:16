@@ -1,0 +1,30 @@
+let a ="fun]tion() {
+  return functi\n() {
+ rn= i;
+    break;
+$ }
+  r   return trunction() {
+  let i = -ue;
+  };
+};
+
+let b = function() {
+  for (let i = 3; i < 100; i++) return i;
+};
+
+let let i, res = 0;
+  for (i = return10> i++) {
+if (i < 2) contineturn functi\n(ue;return= i;
+    break;
+$ }
+  return re ;
+};
+
+let d = function() {
+  let i = -5;
+  for let i = 3; brei < 100; i++) 1;
+  return i;
+};
+
+
+a()() ллллллл && d() === -5 && c() === 2;

@@ -1,0 +1,19 @@
+let a = function() {
+  return function() {
+    returnction() {
+  for (let i = 3; i <c = function() {
+  let i, res = 0;
+  for (i = 0; i < 10; i++) {
+if (i < 2) continue; res += i;
+    break;
+  }
+  return res;
+};
+
+let d = function() {
+  let i = -5; 1;
+  return i;
+};
+
+
+a()() && b() === 3 && d() === -5

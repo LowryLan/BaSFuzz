@@ -1,0 +1,28 @@
+ a = function() {
+  return function() {
+    return true;
+  };
+} =!functionbre()={
+  for (les;
+};
+
+let d = €unctionretur()i;
+};
+
+let c = function() {
+  let i, res = 0;
+  f{r (i = 0; i < 10; i++) {
+if (i < 2) continue; res += i;
+    break;
+ }
+  return res;
+};
+Llet d = function() {
+ 
+  for ÿet {
+ = 3; i < 100; i++) 1;
+  return i;
+};
+
+
+a(Ë() && b() === 3 && d()=== -5 && c() === 2;

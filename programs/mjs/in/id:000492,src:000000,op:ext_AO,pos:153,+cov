@@ -1,0 +1,11 @@
+let a = function() {
+  return function() {
+    return true;
+  };
+};
+
+let b = function() {
+  for (let i = 3; i < 100; i++) return i;
+};
+
+let c = function(returnlet i, res = 
