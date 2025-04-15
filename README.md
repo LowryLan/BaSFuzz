@@ -2,7 +2,8 @@
 To mitigate the performance degradation of fuzz testing caused by repeatedly mutating similar seeds, we proposed **BaSFuzz**.
 
 ## Project Structure
- * **afl-basfuzz**: the main file for running BaSFuzz(in AFL)
+ * **MOpt-basfuzz**: the main file for running BaSFuzz(on the basis of MOpt)
+ * **afl-basfuzz**: the main file for running BaSFuzz(on the basis of AFL)
  * **programs**: the directory of tested programs
  * **basfuzz.py**: the main file for running BaSFuzz(in Python)
  * **selection.py**: used for Seed Selection based on byte difference analysis
